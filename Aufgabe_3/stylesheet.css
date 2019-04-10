@@ -1,0 +1,28 @@
+body{
+    background-color: wheat;
+}
+
+
+
+section{
+background-color: blueviolet;
+width: 90%;
+}
+
+article{
+
+    font-size: 1.5em;
+}
+
+img{
+    height: 50%; 
+    width: 50%;
+    border: 2px solid #000000; 
+    border-radius: 9%
+}
+
+p{
+    font-family: Arial, Helvetica, sans-serif;
+    color:blueviolet;
+    font-size: 1.5em
+    }
