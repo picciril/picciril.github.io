@@ -1,0 +1,150 @@
+body{
+    background-color: #D8D8D8;
+    
+}
+header {
+  background-color: #151515; 
+  margin: 0px; 
+  width: 100%;
+  top: 0px;
+  padding: 10px;
+    }
+
+
+main{
+margin-left: 21em;
+}
+
+section{
+  text-align: center;
+background-color: #58ACFA;
+width: 20%;
+height: 20em;
+margin: 1%;
+float: left;
+overflow: auto;
+    overflow-x: hidden;
+}
+
+article{
+
+    font-size: 15pt;
+    text-align: center;
+    
+}
+
+img{
+    
+    width: 65%;
+    height: auto;
+   
+}
+
+
+p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18pt;
+    text-align: center;
+    }
+
+h1{
+  color:white ; 
+  text-align: left; 
+  font-family: Gloss And Bloom; 
+  padding: 0.2em 1em 0em 1em; 
+  font-size: 30px; 
+  margin: 0px ;
+  float: left ; }
+
+ul{
+text-align: right;
+  list-style-type: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18t;
+  color: white;
+}
+
+li{
+  display: inline;
+  padding: 1.5em; 
+}
+
+li:hover{
+  color: blue;
+}
+
+
+      aside{
+  float: left;
+  width: 20%;
+  background-color: lightsalmon;
+  position: relative;
+  padding-left: 1.5em; 
+  padding-right: 1.5em ; 
+
+}
+    
+.sidebar1{
+    clear: left;
+    float: left;
+    min-height: 50em;
+    overflow: auto;
+}
+
+.sidebar2
+{
+clear: right;
+float: right;
+min-height: 50em;
+max-height: 94em;
+overflow: auto;
+}
+
+.sidebar1:hover{
+  background-color: #58ACFA;
+  width: 30%
+}
+
+.sidebar2:hover{
+  background-color: #58ACFA;
+  width: 25%;
+}
+
+
+footer{
+background-color: #000000;
+color: white;
+width: 100%;
+margin-top: 50em;
+
+padding: 1%;
+}
+
+h2{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+h3{
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+
+
+article
+{
+color: black;
+width: 80%;
+float: bottom;
+margin-left: 5%;
+text-align: center;
+}
+
+footer p{
+  text-align: right;
+}
