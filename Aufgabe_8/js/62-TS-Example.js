@@ -27,6 +27,9 @@ window.onload = function () {
     document.getElementById("monsterSpawner").addEventListener("click", generateMonster, false);
     document.getElementById("monsterPush").addEventListener("click", pushStuff, false);
     updatePlayerLevel(); // Zu Anfang wird durch eine Funktion ein HTML-Element mit Inhalt befüllt.
+    document.getElementById("fightAllMonsters").addEventListener("click", fightAllMonsters);
+    document.getElementById("schwachemonster").addEventListener("click", fightAllWeakMonster); //Gegen SchwacheMonster kämpfen
+    document.getElementById("fightWeakestMonster").addEventListener("click", fightWeakestMonster);
 };
 //console.log(document.getElementById("monsterSpawner").innerHTML );  
 // Die Hauptfunktion, um ein Monster zu erstellen. Wird von einem Button ausgerufen.
@@ -41,6 +44,8 @@ function generateMonster() {
         let newMonsterModifier = generateMonsterModifer();
         let newMonsterImage = generateMonsterImage();
         let newMonsterMoney = generateMonsterMoney();
+                let newmonsterlevel = generatemonsterlevel(); // Funktion für neues Monster Level
+
         // Eigens-gebaute Funktion, welche ein string-Array zurück gibt.
         let newMonster = {
             monsterName: newMonsterName,
@@ -49,6 +54,8 @@ function generateMonster() {
             monsterModifier: newMonsterModifier,
             monsterImage: newMonsterImage,
             monsterMoney: newMonsterMoney,
+            monsterlevel: newmonsterlevel,
+
         };
         monsterArray.push(newMonster); // Monster wird erst in diesem Schritt zu dem Array hinzugefügt 
         //console.log(monsterArray[-1].monsterExperience);                    // Man kann nur auf Array-Teile zugreifen, welche definiert sind. -1 ist nicht definitiert (und wird es auch nie sein).
@@ -72,6 +79,9 @@ function monsterGenerateHTML(monsterCount) {
     monsterImg.setAttribute("src", "imgs/" + monsterArray[monsterCount - 1].monsterImage); // Der Pfad für das Bild muss über setAttribute festgelegt werden. Der Bildpfad kann natürlich auch anders aussehen.
     monsterImg.setAttribute("alt", "Schreckliches Monster"); // Das alt für das Bild wird hier festgelegt.
     holdingDiv.appendChild(monsterImg); // Füge das Bild zu dem holding-div hinzu (<div>, welche ein paar Zeilen zuvor erstellt worden ist)
+    let monsterlevel = document.createElement("p");
+    monsterlevel.innerHTML = "Monster Level: " + monsterArray[count].monsterlevel.toString();
+    holdingDiv.appendChild(monsterlevel);
     let monsterMon = document.createElement("p"); // Generiere einen <p>
     monsterMon.innerHTML = "Geld des Monsters:" + monsterArray[monsterCount - 1].monsterMoney; // Inhalt des <p>: Monster-Money
     holdingDiv.appendChild(monsterMon);
@@ -169,6 +179,12 @@ function updatePlayerLevel() {
     document.getElementById("xpCounter").innerHTML = "Player-Level: " + tempLevel + " (XP: " + playerXP + " / " + playerXPperLevel + ")"; // Baue den String für die Spieler-Info zusammen
     console.log("Spieler " + playerName + " hat nun Level " + tempLevel + " mit " + playerXP + " (" + playerXPperLevel + " pro Level)"); // Spieler-Level in der Konsole.
 }
+
+function generatemonsterlevel() {
+    let monsterlevel = Math.floor(Math.random() * 10);
+    return monsterlevel;
+}
+
 function pushStuff() {
     let Push = [];
     console.log(Push);
@@ -205,5 +221,33 @@ function clearMonsterCell() {
 }
 function getMonsterCount() {
     return monsterArray.length;
+}
+function fightAllMonsters() {
+    for (let i = 0; i < monsterArray.length; i++) // FOR Schleife
+     {
+        fightMonster(i);
+    }
+    console.log("Es wird gegen alle Monster gekämpft");
+}
+function fightAllWeakMonster() {
+    for (let i = monsterArray.length - 1; i >= 0; i--)
+        if (monsterArray[i].monsterlevel < PlayerLevel) {
+            fightMonster(i);
+        }
+}
+function fightWeakestMonster() {
+    let _index = 0;
+    let findweakeastmonster = monsterArray[0].monsterlevel;
+    for (let i = monsterArray.length - 1; i >= 0; i--) {
+        console.log("for schleife wird ausgeführt, JUCHUU :D ");
+        if (monsterArray[i].monsterlevel < findweakeastmonster) {
+            _index = i;
+            findweakeastmonster = monsterArray[i].monsterlevel;
+            console.log("Schwächste Monster bekämpft");
+        }
+    }
+    if (monsterArray[_index].monsterlevel < Playerlevel) {
+        fightMonster(_index);
+    }
 }
 //# sourceMappingURL=62-TS-Example.js.map

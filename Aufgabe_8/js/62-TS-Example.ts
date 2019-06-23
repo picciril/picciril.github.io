@@ -63,6 +63,9 @@ window.onload = function () {
     document.getElementById("monsterSpawner").addEventListener("click", generateMonster, false);
     document.getElementById("monsterPush").addEventListener("click", pushStuff, false);
     updatePlayerLevel();// Zu Anfang wird durch eine Funktion ein HTML-Element mit Inhalt befüllt.
+    document.getElementById("fightAllMonsters").addEventListener("click", fightAllMonsters);
+    document.getElementById("schwachemonster").addEventListener("click", fightAllWeakMonster); //Gegen SchwacheMonster kämpfen
+    document.getElementById("fightWeakestMonster").addEventListener("click", fightWeakestMonster);
 
 }
 
@@ -295,4 +298,33 @@ function clearMonsterCell() {
 function getMonsterCount() {
     return monsterArray.length;
 
-}    
+}   
+
+function fightAllMonsters() {
+    for (let i = 0; i < monsterArray.length; i++) // FOR Schleife
+     {
+        fightMonster(i);
+    }
+    console.log("Es wird gegen alle Monster gekämpft");
+}
+function fightAllWeakMonster() {
+    for (let i = monsterArray.length - 1; i >= 0; i--)
+        if (monsterArray[i].monsterExperience < playerXPperLevel) {
+            fightMonster(i);
+        }
+}
+function fightWeakestMonster() {
+    let _index = 0;
+    let findweakeastmonster = monsterArray[0].monsterExperience;
+    for (let i = monsterArray.length - 1; i >= 0; i--) {
+        console.log("for schleife wird ausgeführt, JUCHUU :D ");
+        if (monsterArray[i].monsterExperience < findweakeastmonster) {
+            _index = i;
+            findweakeastmonster = monsterArray[i].monsterlevel;
+            console.log("Schwächste Monster bekämpft");
+        }
+    }
+    if (monsterArray[_index].monsterExperience < playerXPperLevel) {
+        fightMonster(_index);
+    }
+}
