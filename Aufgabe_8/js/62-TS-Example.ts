@@ -25,6 +25,7 @@ interface Monster {
     monsterModifier : string []; // Monster-Verstärker. Diese sind in diesem Fall nur Text! (Da hier einfacher Zufall für die Auswahl genutzt wird, kann der gleiche Eintrag auch doppelt vorkommen)
     monsterImage: string;
     monsterMoney : number;// Erfahrungspunkte bei besiegen des Monsters
+    monsterLevel : number; 
 }
 
 
@@ -36,6 +37,7 @@ let monsterHolder : string = "monsterHoldingCell";                              
 let playerName : string = "Spielername";                                            // Ein paar globale Variablen, welche den Spieler darstellen.
 let playerXP : number = 0;                                                          // Stellt die gesammelte Erfahrung des Spielers dar.
 let playerXPperLevel : number = 500;
+let playerLevel : number = 1;
 let money : number = 0;
                                                // Da es nur einen Spieler gibt, ergibt sich noch nicht viel Sinn darin, für den Spieler ein interface (im Sinne der Programmierung) zu erstellen.
 
@@ -44,7 +46,7 @@ let money : number = 0;
 let prefix : string[] = ["Wald-", "Seuchen-", "Uralte(s) ", "Gift-", "Brennende(s) ", "Kniescheibenzertrümmernde(s) ", "Einhorniges-","Kleeblattriger-","Sonnengetünchter-","Staubliebender-","Wasserträumer-"]; // length = 6, da 6 Einträge. Von 0-5.
 let monsterName : string[] = ["Ratte", "Nagetier", "Ungeziefer","Libelle","Hündchen","Feuerelfe","Salamander","Heuschrecke"]; // length = 3, da 3 Einträge. Von 0-2.
 let suffix : string[] = [" des Verderbens", " aus der Hölle", " der Lethalität", " mit Rheuma", " der Redundanz", " der Zerberstung","mit Zuckerwatte", "mit Blaubeeren","mit Softeis","mit Schimmel","mit Trauben"]; // length = 6, da hier 6 Einträge sind. Von 0-5.
-
+let monsterLevel : number;
 let monsterModifers : string[] = ["Ist nervig", "Linkshänder", "Bier-Connoisseur", "Verfehlt häufig", "Prokrastiniert", "Müde", "Verwirrt", "Wasserscheu", "Bipolar", "Hat Schnupfen", "Verläuft sich oft"]; // Eine Reihe von zufälligen "Verstärkern" für das Monster.
 
 let monsterImages : string []= ["b1.png","b2.png","b3.png", "b4.png", "b5.jpg", "b6.png"]
@@ -62,10 +64,10 @@ console.log(monsterArray); // Gebe das Monster-Array einmal zu beginn aus. Es so
 window.onload = function () {
     document.getElementById("monsterSpawner").addEventListener("click", generateMonster, false);
     document.getElementById("monsterPush").addEventListener("click", pushStuff, false);
-    updatePlayerLevel();// Zu Anfang wird durch eine Funktion ein HTML-Element mit Inhalt befüllt.
+    updatePlayerLevel(0);// Zu Anfang wird durch eine Funktion ein HTML-Element mit Inhalt befüllt.
     document.getElementById("fightAllMonsters").addEventListener("click", fightAllMonsters);
-    document.getElementById("schwachemonster").addEventListener("click", fightAllWeakMonster); //Gegen SchwacheMonster kämpfen
-    document.getElementById("fightWeakestMonster").addEventListener("click", fightWeakestMonster);
+    document.getElementById("allWeakMonsters").addEventListener("click", fightAllWeakMonster); //Gegen SchwacheMonster kämpfen
+    document.getElementById("weakestMonster").addEventListener("click", fightWeakestMonster);
 
 }
 
@@ -85,7 +87,7 @@ function generateMonster()
     let newMonsterModifier : string[] = generateMonsterModifer();
     let newMonsterImage : string = generateMonsterImage();
     let newMonsterMoney : number =generateMonsterMoney();
-
+    let newMonsterLevel : number =getRNGNumber(7);
    
            // Eigens-gebaute Funktion, welche ein string-Array zurück gibt.
 
@@ -96,6 +98,7 @@ function generateMonster()
         monsterModifier : newMonsterModifier,  
         monsterImage : newMonsterImage,
         monsterMoney : newMonsterMoney,
+        monsterLevel : newMonsterLevel,
     };
 
     monsterArray.push(newMonster);                                      // Monster wird erst in diesem Schritt zu dem Array hinzugefügt 
@@ -117,7 +120,7 @@ function monsterGenerateHTML(monsterCount: number)
     let monsterName : HTMLElement = document.createElement("p");        // Generiere einen <p>
     monsterName.innerHTML = monsterArray[monsterCount - 1].monsterName;                     // Inhalt des <p>: Monster-Name des letzten Monsters im Array.
     holdingDiv.appendChild(monsterName);                                // Füge das <p> zum HTML-Dokument hinzu, indem es dem holding-Div angefügt wird.
-    
+
 
     let monsterMod : HTMLElement = document.createElement("p");        // Generiere einen <p>
     monsterMod.innerHTML = monsterArray[monsterCount - 1].monsterModifier[0] + ", " +  monsterArray[monsterArray.length -1].monsterModifier[1]; // Inhalt des <p>: Monster-Modifizierer null und eins
@@ -132,17 +135,21 @@ function monsterGenerateHTML(monsterCount: number)
     monsterMon.innerHTML = "Geld des Monsters:" + monsterArray[monsterCount - 1].monsterMoney; // Inhalt des <p>: Monster-Money
     holdingDiv.appendChild(monsterMon);
 
-    let monsterBtn : HTMLElement = document.createElement("BUTTON");    // Erstelle ein <button>-Element
-    monsterBtn.innerHTML = "Monster bekämpfen!";                        // Verändere den Inhalt des HTML-Elementes. Der genaue Text ist dabei euch überlassen.
-    holdingDiv.appendChild(monsterBtn);                                 // Füge den Button zu dem holding-div hinzu.
+    let Monsterlvl : HTMLElement = document.createElement("p");
+    Monsterlvl.innerHTML = "Level:" + monsterArray[monsterCount-1].monsterLevel;
+    holdingDiv.appendChild(Monsterlvl);
+
+    //let monsterBtn : HTMLElement = document.createElement("BUTTON");    // Erstelle ein <button>-Element
+    //monsterBtn.innerHTML = "Monster bekämpfen!";                        // Verändere den Inhalt des HTML-Elementes. Der genaue Text ist dabei euch überlassen.
+    //holdingDiv.appendChild(monsterBtn);                                 // Füge den Button zu dem holding-div hinzu.
 
     //let monsterC : number = monsterCount;                    // Die aktuelle Anzahl vorhandener Monster, zudem auch die neue Zahl für das Monster-Array.
     //console.log("Aktuelle Anzahl an Monstern: " + monsterCount);
 
-    monsterBtn.addEventListener(                                        // Füge dem Monster eine Funktion hinzu.
-        'click', function() {                                           // Wird bei Maus-Click ausgelöst.
-            fightMonster(monsterCount);                                 // Wenn das Monster erstellt wird erhält die Funktion einen Parameter, welcher der aktuellen Anzahl entspricht.
-       },  false);                                                      // Ignoriert das false.
+    //monsterBtn.addEventListener(                                        // Füge dem Monster eine Funktion hinzu.
+    //    'click', function() {                                           // Wird bei Maus-Click ausgelöst.
+     //       fightMonster(monsterCount);                                 // Wenn das Monster erstellt wird erhält die Funktion einen Parameter, welcher der aktuellen Anzahl entspricht.
+     //  },  false);                                                      // Ignoriert das false.
 }
 
 
@@ -213,12 +220,11 @@ function generateMonsterModifer() : string[]
     return tempMonsterMod;                                                      // Gebe das hier zusammengesetzte Array wieder zurück.
 }
 
-function generateMonsterImage() : string {
-    let image : string = "";
-    let rngNumber : number = getRNGNumber(monsterImages.length);               // Der Rückgabewert der Funktion wird hier verwendet um den entsprechenden Teil des Namens (hier: Anfang) zu generieren.
-    image = monsterImages[rngNumber];
-    return image;
+function generateMonsterImage() {
+    let rngNumber = getRNGNumber(monsterImages.length);               // Der Rückgabewert der Funktion wird hier verwendet um den entsprechenden Teil des Namens (hier: Anfang) zu generieren.
+    return monsterImages[rngNumber];
 }
+
 
 function generateMonsterMoney() : number {
     let money : number = getRNGNumber(100);
@@ -226,20 +232,17 @@ function generateMonsterMoney() : number {
 }
 // Aufgerufen, wenn man auf den Button klickt.
 // Der Spieler kämpft gegen das entsprechende Monster. Er erhält dann Erfahrungspunkte.
-function fightMonster(_index : number)
-{
-    if(Math.random() < 0.7) {
-        playerXP += monsterArray[_index - 1].monsterExperience;
-        monsterArray.splice(_index - 1,1);
-        console.log("Das Monster wurde besiegt");
+function fightMonster(_index : number){
+    if (monsterArray[_index].monsterLevel <= playerLevel + 1) {
+        monsterArray[_index].monsterHealthPoints -= 5;
+        playerXP += monsterArray[_index].monsterExperience;
+        updateHTML();
+        if(monsterArray[_index].monsterHealthPoints < 1) {
+            updatePlayerLevel(0 + monsterArray[_index].monsterExperience);
+            monsterArray.splice(_index, 1);
+            updateHTML();
+        }
     }
-    else{
-        window.alert("Das Monster wurde noch nicht besiegt! Probiere es erneut!");
-        console.log("Das Monster verschwindet nicht");
-    }
-    
-    updatePlayerLevel();
-    updateHTML();
 }
 
 function runAway(){
@@ -247,12 +250,23 @@ function runAway(){
     document.getElementById(monsterHolder).innerHTML = "";
 }
 // Aufgerufen, um das HTML-Element, welches das Spieler-Level darstellt, zu erneuern.
-function updatePlayerLevel()
+function updatePlayerLevel(XPChange : number)
 {
-    let tempLevel : number = Math.floor(playerXP / playerXPperLevel);                                                                           // Spieler-Level = XP / XPproLevel
+    playerXP = XPChange;
+    if(Math.floor(playerXP / playerXPperLevel) + 1 >= 1)
+    {
+        playerLevel = Math.floor(playerXP / playerXPperLevel) + 1;
+    }
+    document.getElementById("xpCounter").innerHTML = "Player-Level: " + playerLevel + " (XP: " + playerXP + " / " + playerXPperLevel + ")";       // Baue den String für die Spieler-Info zusammen
+    if(playerLevel == 20) {
+        playerLevel = 1;
+        playerXP == 0;
+        monsterArray = [];
+        updatePlayerLevel(0);
+        updateHTML();
+    }
 
-    document.getElementById("xpCounter").innerHTML = "Player-Level: " + tempLevel + " (XP: " + playerXP + " / " + playerXPperLevel + ")";       // Baue den String für die Spieler-Info zusammen
-    console.log("Spieler " + playerName + " hat nun Level " + tempLevel + " mit " + playerXP + " (" + playerXPperLevel + " pro Level)");        // Spieler-Level in der Konsole.
+
 }
 
 function pushStuff ()
@@ -305,7 +319,6 @@ function fightAllMonsters() {
      {
         fightMonster(i);
     }
-    console.log("Es wird gegen alle Monster gekämpft");
 }
 function fightAllWeakMonster() {
     for (let i = monsterArray.length - 1; i >= 0; i--)
@@ -317,11 +330,9 @@ function fightWeakestMonster() {
     let _index = 0;
     let findweakeastmonster = monsterArray[0].monsterExperience;
     for (let i = monsterArray.length - 1; i >= 0; i--) {
-        console.log("for schleife wird ausgeführt, JUCHUU :D ");
         if (monsterArray[i].monsterExperience < findweakeastmonster) {
             _index = i;
-            findweakeastmonster = monsterArray[i].monsterlevel;
-            console.log("Schwächste Monster bekämpft");
+            findweakeastmonster = monsterArray[i].monsterLevel;
         }
     }
     if (monsterArray[_index].monsterExperience < playerXPperLevel) {
