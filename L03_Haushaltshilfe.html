@@ -1,107 +1,143 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Formular</title>
-    <link rel="stylesheet" href="stylesheet.css" type="text/css" media="screen" />
-	<script src="script.js" type="text/javascript" charset="utf-8"></script> 
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="haushaltshilfe.css">
+	<script src="haushaltshilfe.js"></script>
 </head>
+
 <body>
-    
 
-    <h1>Deine Online-Haushaltshilfe</h1>
-    <hr>
+	<h1>Die Haushaltshilfe</h1> <br>
 
-    <form></form>
-    <div>
-        <h4>EINKAUFEN</h4>
+<div id="change">
+<form>
+	<fieldset>
+		<p>Wählen Sie unte folgenden Erledigungen:</p>
+		<input type="checkbox" name="einkaufen" value="einkaufen" id="check1" />
+		<label for="check1">Einkaufen</label>
+		<input type="checkbox" name="rasenmähen" value="rasenmähen" id="check2" />
+		<label for="check2">Rasenmähen</label>
+	</fieldset> <br> <br>
 
-        <input type="radio" name="Radiogroup" value="radio1" id="radio1" />
-		<label for="radio1">Wöchentlich</label>
-		<input type="radio" name="Radiogroup" value="radio2" id="radio2" />
-		<label for="radio2">Täglich</label>
-		<input type="radio" name="Radiogroup" value="radio3" id="radio3" />
-        <label for="radio3">Monatlich</label>
-       
-        <div id="chooseItem">
+	<fieldset>
+		<legend> Erledigung - Einkaufen </legend>
+		<p class="bold">Artikel
+			<span class="z1">Menge</span>
+			<span class="z2">Einheit</span>
+			<span class="z3">Preis pro Einheit</span>
+			<span class="z5">Kosten</span>
 
-            
-            <br>
+		</p>
+		<hr>
+		<p>Brot
+			<input class="z1" type="text" name="Datalist" list="options" placeholder="       ...choose ammount" />
+			<datalist  id="options">
+				<option value="0,5 kg"> </option>
+				<option value="1 kg"> </option>
+				<option value="1,5 kg"> </option>
+				<option value="2 kg"> </option>
+				<option value="3 kg"> </option>
+			
+			</datalist>
 
-    
-            <select id="optionen">
-                <option value="Butter" price="2,3"> Butter </option>
-                <option value="Milch" price="2,1"> Milch</option>
-                <option value="Mehl" price="1"> Mehl</option>
-                <option value="Zucker" price="2">Zucker </option>
-                <option value="Eier" price="3,5"> Eier</option>
-                <option value="Salz" price="5">Salz </option>
-                <option value="Brot" price="5">Brot </option>
-            </select>
-           
+			<span class="z2">Kilogramm</span>
+			<span class="z3">3,00€</span>
+			<span class="shoppingcosts" id="shopping1"> ...............</span>
+		</p>
 
-		    <input type="range" name="Menge" min="0" max="10" step="1" value="2"/>   
-            
+		<hr>
+		<p>Äpfel
+			<span class="z1">
+				<input type="radio" name="Radiogroup" value="radio1" id="radio1" />
+				<label for="radio1">2</label>
+				<input type="radio" name="Radiogroup" value="radio2" id="radio2" />
+				<label for="radio2">4</label>
+				<input type="radio" name="Radiogroup" value="radio3" id="radio3" />
+				<label for="radio3">6</label>
+			</span>
+			<span class="z2">Stück</span>
+			<span class="z3">0,30€</span>
+			<span class="shoppingcosts" id="shopping2"> ...............</span>
+		</p>
+		<hr>
 
-            <select id="shop">
-                    <option value="Aldi"> Aldi </option>
-                    <option value="Lidl"> Lidl</option>
-                    <option value="Edeka"> Edeka</option>
-                    <option value="Bio-Laden">Bio-Laden </option>
-                    <option value="Rewe"> Rewe</option>
-    
-            </select>
+		<p>Wasser
+			<span class="z1">
+				1L<input type="range" name="Slider" min="0" max="20" step="1" value="0" />20L
+			</span>
+			<span class="z2">Liter</span>
+			<span class="z3">0,40€</span>
+			<span class="shoppingcosts" id="shopping3"> ...............</span>
+		</p>
+		<hr>
 
-            <input type="checkbox" name="Done">
+		<p>Grundgebühr: <span class="z5">10,00 €</span></p>
 
-        </div>
-        <div id="cloneDiv"></div>
+		<hr>
+		<p>Gesamt <span class="shoppingcosts" id="shopping4"> ...............</span> </p>
+	</fieldset> <br> <br>
 
-        <br>
-        <button id="addItem"> Neuen Ware hinzufügen </button>
-        
-    </div>
+
+	<fieldset>
+		<legend> Erledigung - Rasenmähen</legend>
+		<p>Geben Sie hier die ungefähre Rasenfläche in Quadratmetern an</p>
+		Rasenfläche: <input type="text" name="Text" placeholder="             .... z.B. 80" required />
+		<hr>
+		<p>Preis pro Quadratmeter:
+			<span class="z2">0,10 €</span>
+		</p>
+		<hr>
+		<p>Grundgebühr:
+			<span class="z2">10,00 €</span>
+		</p>
+		<hr>
+		<p>Gesamt:
+			<span id="mowing1">..............</span>
+		</p>
+
+	</fieldset> <br> <br>
 </form>
-    <hr>
+</div>
+
+	<fieldset>
+		<legend>Übersicht der gewählten Dienste</legend>
+		<p>Erledigung - Einkaufen:
+			<span class="overviewcosts" id="overview1">.............</span>
+		</p>
+		<hr>
+
+		<p>Erledigung - Rasenmähen:
+			<span class="overviewcosts" id="overview2">.............</span>
+		</p>
+		<hr>
+
+		<p>Gesamtkosten:
+			<span class="overviewcosts" id="overview3">.............</span>
+		</p>
+	</fieldset>
 
 
-    <div>
 
-        <h4>HAUSHALTSHILFE</h4>
-        <div id="householdTask">
-                <select id="haushalt">
-                        <option value="Gassi gehen" price="10">Gassi gehen </option>
-                        <option value="Wischen" price="12"> Wischen</option>
-                        <option value="Fenster Putzen" price="15"> Fenster Putzen</option>
-                        <option value="Sonstige" price="10">Sonstige </option>
-                       
-                </select>
 
-                
-                <input type="radio" name="Radiogroup" value="radio1" id="radio1" />
-		        <label for="radio1">Wöchentlich</label>
-		        <input type="radio" name="Radiogroup" value="radio2" id="radio2" />
-		        <label for="radio2">Täglich</label>
-		        <input type="radio" name="Radiogroup" value="radio3" id="radio3" />
-                <label for="radio3">Monatlich</label>
-            
-                    <br>
-                    <br>
-                   
-      
-            </div>
-            <div id="cloneDivTask"></div>
-            <br>
-            <button id="addTask">Neue Aufgabe hinzufügen</button>
-    </div>
 
-    <hr>
-    <div>
-        <h4>DEINE BESTELLUNG</h4>
-    </div>
+
+
+
+
+
+
+
+
+	<br> <br> <br> <br> <br> <br> <br>
+
+
+
 
 </body>
+
 </html>
