@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Formular</title>
+    <link rel="stylesheet" href="stylesheet.css" type="text/css" media="screen" />
+	<script src="script.js" type="text/javascript" charset="utf-8"></script> 
+</head>
+<body>
+    
+
+    <h1>Deine Online-Haushaltshilfe</h1>
+    <hr>
+
+    <form></form>
+    <div>
+        <h4>EINKAUFEN</h4>
+
+        <input type="radio" name="Radiogroup" value="radio1" id="radio1" />
+		<label for="radio1">Wöchentlich</label>
+		<input type="radio" name="Radiogroup" value="radio2" id="radio2" />
+		<label for="radio2">Täglich</label>
+		<input type="radio" name="Radiogroup" value="radio3" id="radio3" />
+        <label for="radio3">Monatlich</label>
+       
+        <div id="chooseItem">
+
+            
+            <br>
+
+    
+            <select id="optionen">
+                <option value="Butter" price="2,3"> Butter </option>
+                <option value="Milch" price="2,1"> Milch</option>
+                <option value="Mehl" price="1"> Mehl</option>
+                <option value="Zucker" price="2">Zucker </option>
+                <option value="Eier" price="3,5"> Eier</option>
+                <option value="Salz" price="5">Salz </option>
+                <option value="Brot" price="5">Brot </option>
+            </select>
+           
+
+		    <input type="range" name="Menge" min="0" max="10" step="1" value="2"/>   
+            
+
+            <select id="shop">
+                    <option value="Aldi"> Aldi </option>
+                    <option value="Lidl"> Lidl</option>
+                    <option value="Edeka"> Edeka</option>
+                    <option value="Bio-Laden">Bio-Laden </option>
+                    <option value="Rewe"> Rewe</option>
+    
+            </select>
+
+            <input type="checkbox" name="Done">
+
+        </div>
+        <div id="cloneDiv"></div>
+
+        <br>
+        <button id="addItem"> Neuen Ware hinzufügen </button>
+        
+    </div>
+</form>
+    <hr>
+
+
+    <div>
+
+        <h4>HAUSHALTSHILFE</h4>
+        <div id="householdTask">
+                <select id="haushalt">
+                        <option value="Gassi gehen" price="10">Gassi gehen </option>
+                        <option value="Wischen" price="12"> Wischen</option>
+                        <option value="Fenster Putzen" price="15"> Fenster Putzen</option>
+                        <option value="Sonstige" price="10">Sonstige </option>
+                       
+                </select>
+
+                
+                <input type="radio" name="Radiogroup" value="radio1" id="radio1" />
+		        <label for="radio1">Wöchentlich</label>
+		        <input type="radio" name="Radiogroup" value="radio2" id="radio2" />
+		        <label for="radio2">Täglich</label>
+		        <input type="radio" name="Radiogroup" value="radio3" id="radio3" />
+                <label for="radio3">Monatlich</label>
+            
+                    <br>
+                    <br>
+                   
+      
+            </div>
+            <div id="cloneDivTask"></div>
+            <br>
+            <button id="addTask">Neue Aufgabe hinzufügen</button>
+    </div>
+
+    <hr>
+    <div>
+        <h4>DEINE BESTELLUNG</h4>
+    </div>
+
+</body>
+</html>
