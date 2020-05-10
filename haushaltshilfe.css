@@ -1,0 +1,55 @@
+h1 {
+    font-size: 45px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.shoppingcosts { 
+    position: absolute;
+    background-color: rgb(128, 128, 128, 0.3); 
+    left: 60%;
+}
+
+#mowing1 {
+    position: absolute;
+    background-color: rgb(128, 128, 128, 0.3);
+    left: 32%;
+}
+
+.z1 {
+    position: absolute;
+    left: 13%;
+}
+
+.z2 {
+    position: absolute;
+    left: 32%;
+}
+
+.z3 {
+    position: absolute;
+    left: 44%;
+}
+
+.z4 {
+    position: absolute;
+    left: 50%;
+}
+
+.z5 {
+    position: absolute;
+    left: 60%;
+}
+
+.overviewcosts {
+    position: absolute;
+    background-color: rgb(128, 128, 128, 0.3);
+    left: 32%;
+}
+
+legend {
+    font-size: 20px;
+    font-weight: bold;
+}
